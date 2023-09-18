@@ -27,6 +27,7 @@ import { HamburgerIcon, CloseIcon, ChevronDownIcon, ChevronRightIcon } from '@ch
 import Image from 'next/image';
 import { HiChevronDown, HiMoon, HiSun } from 'react-icons/hi';
 import { Input } from '@chakra-ui/react';
+// import styles from './styles.css';
 
 const DesktopNav = () => {
 	const linkColor = useColorModeValue('gray.600', 'gray.200');
@@ -254,39 +255,19 @@ export default function Header() {
 						</Flex>
 					</Flex>
 
-					<Stack flex={{ base: 1, md: 0 }} justify={'flex-end'} direction={'row'} spacing={1}>
-						<Button
+					<Stack flex={{ base: 1, md: 0 }} justify={'flex-end'} direction={'row'} spacing={2}>
+						<IconButton
 							variant={'link'}
-							className='p-2 rounded-md border'>
-							<HiMoon />
-						</Button>
-						<Button
-							fontSize={'sm'}
-							fontWeight={500}
-							variant={'link'}
-							className='p-2 hover:no-underline'>
+							className='rounded-md border'
+							aria-label='Search database'
+							icon={<HiMoon />}
+						/>
+						<Button fontSize={'sm'} variant={'text'} className='btn-account'>
 							Tài khoản
 						</Button>
-						{/* <Button
-							as={'a'}
-							display={{ base: 'none', md: 'inline-flex' }}
-							fontSize={'sm'}
-							fontWeight={600}
-							color={'white'}
-							bg={'green.400'}
-							href={'#'}
-							_hover={{
-								bg: 'green.300',
-							}}>
-							Sign Up
-						</Button> */}
 					</Stack>
 				</Flex>
 			</Box>
-
-			{/* <Collapse in={isOpen} animateOpacity>
-				<MobileNav />
-			</Collapse> */}
 
 			<Drawer placement='left' onClose={onClose} isOpen={isOpen}>
 				<DrawerOverlay />

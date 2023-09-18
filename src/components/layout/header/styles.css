@@ -1,0 +1,3 @@
+.btn-account {
+    @apply text-gray-900 hover:no-underline;
+  }

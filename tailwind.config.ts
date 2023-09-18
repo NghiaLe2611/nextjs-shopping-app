@@ -18,5 +18,6 @@ const config: Config = {
   darkMode: 'class',
   // darkMode: ['class', '[data-mode="dark"]'],
   plugins: [],
+  // prefix: 'tw-',
 }
 export default config

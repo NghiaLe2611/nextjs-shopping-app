@@ -1,0 +1,8 @@
+{
+    "homePage": {
+        "welcome": "Welcome to home page"
+    },
+    "authPage": {
+        "welcome": "Welcome to auth page"
+    }
+}
