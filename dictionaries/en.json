@@ -4,5 +4,9 @@
     },
     "authPage": {
         "welcome": "Welcome to auth page"
+    },
+    "content": {
+        "dangky": "Register",
+        "dangnhap": "Log in"
     }
 }

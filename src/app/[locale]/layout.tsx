@@ -2,7 +2,7 @@
 
 import type { Metadata } from 'next';
 import { NextIntlClientProvider } from 'next-intl';
-import { Inter } from 'next/font/google';
+import { Inter, Raleway } from 'next/font/google';
 import { i18n } from '../../../i18n.config';
 import { Providers } from '../providers';
 import './globals.scss';
@@ -14,6 +14,12 @@ type Props = {
 };
 
 const inter = Inter({ subsets: ['latin'] });
+const raleway = Raleway({
+	subsets: ['latin'],
+	display: 'swap',
+	variable: '--font-raleway',
+	// weight: ['100', '200', '300', '400', '500', '600', '700', '800', '900'],
+});
 
 export const metadata: Metadata = {
 	title: 'NextJS Shopping App',
@@ -40,7 +46,7 @@ export default async function RootLayout({ children, params: { locale } }: Props
 				{/* <script>0</script> */}
 			</head>
 			<Providers>
-				<body className={`h-full ${inter.className}`}>
+				<body className={`h-full ${inter.className} ${raleway.variable}`}>
 					<NextIntlClientProvider locale={locale} messages={content}>
 						{children}
 						{/* <NextScript /> */}

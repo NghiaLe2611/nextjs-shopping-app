@@ -4,5 +4,9 @@
     },
     "authPage": {
         "welcome": "Chào mừng bạn tới trang đăng nhập"
+    },
+    "content": {
+        "dangky": "Đăng ký",
+        "dangnhap": "Đăng nhập"
     }
 }

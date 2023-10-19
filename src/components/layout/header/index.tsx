@@ -22,11 +22,21 @@ import {
 	DrawerOverlay,
 	DrawerContent,
 	DrawerCloseButton,
+	Select,
+	Menu,
+	MenuButton,
+	MenuList,
+	MenuItem,
+	Link,
 } from '@chakra-ui/react';
 import { HamburgerIcon, CloseIcon, ChevronDownIcon, ChevronRightIcon } from '@chakra-ui/icons';
 import Image from 'next/image';
-import { HiChevronDown, HiMoon, HiSun } from 'react-icons/hi';
+import { HiChevronDown, HiMoon, HiSun, HiGlobeAlt, HiOutlineDeviceMobile } from 'react-icons/hi';
 import { Input } from '@chakra-ui/react';
+import ThemeButton from './ThemeButton';
+import LanguageButton from './LanguageButton';
+import AuthButton from './AuthButton';
+// import Link from 'next/link';
 // import styles from './styles.css';
 
 const DesktopNav = () => {
@@ -78,45 +88,51 @@ const DesktopNav = () => {
 	);
 };
 
-const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
-	return (
-		<Box
-			as='a'
-			href={href}
-			role={'group'}
-			display={'block'}
-			p={2}
-			rounded={'md'}
-			_hover={{ bg: useColorModeValue('green.50', 'gray.900') }}>
-			<Stack direction={'row'} align={'center'}>
-				<Box>
-					<Text transition={'all .3s ease'} _groupHover={{ color: 'green.400' }} fontWeight={500}>
-						{label}
-					</Text>
-					{/* <Text fontSize={'sm'}>{subLabel}</Text> */}
-				</Box>
-				<Flex
-					transition={'all .3s ease'}
-					transform={'translateX(-10px)'}
-					opacity={0}
-					_groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
-					justify={'flex-end'}
-					align={'center'}
-					flex={1}>
-					<Icon color={'green.400'} w={5} h={5} as={ChevronRightIcon} />
-				</Flex>
-			</Stack>
-		</Box>
-	);
-};
+// const DesktopSubNav = ({ label, href, subLabel }: NavItem) => {
+// 	return (
+// 		<Box
+// 			as='a'
+// 			href={href}
+// 			role={'group'}
+// 			display={'block'}
+// 			p={2}
+// 			rounded={'md'}
+// 			_hover={{ bg: useColorModeValue('green.50', 'gray.900') }}>
+// 			<Stack direction={'row'} align={'center'}>
+// 				<Box>
+// 					<Text transition={'all .3s ease'} _groupHover={{ color: 'green.400' }} fontWeight={500}>
+// 						{label}
+// 					</Text>
+// 					{/* <Text fontSize={'sm'}>{subLabel}</Text> */}
+// 				</Box>
+// 				<Flex
+// 					transition={'all .3s ease'}
+// 					transform={'translateX(-10px)'}
+// 					opacity={0}
+// 					_groupHover={{ opacity: '100%', transform: 'translateX(0)' }}
+// 					justify={'flex-end'}
+// 					align={'center'}
+// 					flex={1}>
+// 					<Icon color={'green.400'} w={5} h={5} as={ChevronRightIcon} />
+// 				</Flex>
+// 			</Stack>
+// 		</Box>
+// 	);
+// };
 
 const MobileNav = () => {
 	return (
-		<Stack bg={useColorModeValue('white', 'gray.800')} p={4} display={{ md: 'none' }}>
-			{NAV_ITEMS.map((navItem) => (
-				<MobileNavItem key={navItem.label} {...navItem} />
-			))}
-		</Stack>
+		<Box fontFamily='var(--font-raleway)'>
+			<Box as='a' href='/' display='flex' alignItems='center' p={4} mb={3}>
+				<Image src='/images/next-black.svg' alt='logo' width='32' height='32' />
+				<Text ml={2}>NextJS Shopping App</Text>
+			</Box>
+			<Stack bg={useColorModeValue('white', 'gray.800')} px={4} display={{ md: 'none' }}>
+				{NAV_ITEMS.map((navItem) => (
+					<MobileNavItem key={navItem.label} {...navItem} />
+				))}
+			</Stack>
+		</Box>
 	);
 };
 
@@ -124,19 +140,20 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
 	const { isOpen, onToggle } = useDisclosure();
 
 	return (
-		<Stack spacing={4} onClick={children && onToggle}>
+		<Stack spacing={2}>
 			<Box
-				py={2}
-				as='a'
-				href={href ?? '#'}
+				py={3}
+				// as='a'
+				// href={href ?? '#'}
+				display='flex'
 				justifyContent='space-between'
 				alignItems='center'
 				_hover={{
 					textDecoration: 'none',
 				}}>
-				<Text fontWeight={600} color={useColorModeValue('gray.600', 'gray.200')}>
+				<Box as='a' href={href ?? '#'} fontWeight={500} color={useColorModeValue('gray.600', 'gray.200')}>
 					{label}
-				</Text>
+				</Box>
 				{children && (
 					<Icon
 						as={ChevronDownIcon}
@@ -144,18 +161,13 @@ const MobileNavItem = ({ label, children, href }: NavItem) => {
 						transform={isOpen ? 'rotate(180deg)' : ''}
 						w={6}
 						h={6}
+						onClick={onToggle}
 					/>
 				)}
 			</Box>
 
 			<Collapse in={isOpen} animateOpacity style={{ marginTop: '0!important' }}>
-				<Stack
-					mt={2}
-					pl={4}
-					borderLeft={1}
-					borderStyle={'solid'}
-					borderColor={useColorModeValue('gray.200', 'gray.700')}
-					align={'start'}>
+				<Stack pl={4} mb={3} align={'start'}>
 					{children &&
 						children.map((child) => (
 							<Box as='a' key={child.label} py={2} href={child.href}>
@@ -250,21 +262,22 @@ export default function Header() {
 							{/* flex={1} justifyContent='center' */}
 							<DesktopNav />
 							<Flex ml={10} className='w-1/2'>
-								<Input placeholder='Tìm kiếm' />
+								<Input
+									placeholder='Tìm kiếm'
+									colorScheme='teal'
+									_focusVisible={{
+										outline: 'none',
+										borderColor: 'var(--chakra-colors-teal-500)',
+									}}
+								/>
 							</Flex>
 						</Flex>
 					</Flex>
 
-					<Stack flex={{ base: 1, md: 0 }} justify={'flex-end'} direction={'row'} spacing={2}>
-						<IconButton
-							variant={'link'}
-							className='rounded-md border'
-							aria-label='Search database'
-							icon={<HiMoon />}
-						/>
-						<Button fontSize={'sm'} variant={'text'} className='btn-account'>
-							Tài khoản
-						</Button>
+					<Stack flex={{ base: 1, md: 0 }} justify={'flex-end'} direction={'row'} spacing={1}>
+						<ThemeButton />
+						<LanguageButton />
+						<AuthButton />
 					</Stack>
 				</Flex>
 			</Box>
@@ -272,7 +285,7 @@ export default function Header() {
 			<Drawer placement='left' onClose={onClose} isOpen={isOpen}>
 				<DrawerOverlay />
 				<DrawerContent>
-					<DrawerBody>
+					<DrawerBody padding={0}>
 						<MobileNav />
 					</DrawerBody>
 				</DrawerContent>
